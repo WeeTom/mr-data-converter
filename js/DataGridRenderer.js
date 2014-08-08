@@ -382,7 +382,6 @@ var DataGridRenderer = {
   // XML Nodes
   //---------------------------------------
   xml: function (dataGrid, headerNames, headerTypes, indent, newLine) {
-    //inits...
     var commentLine = "<!--";
     var commentLineEnd = "-->";
     var outputText = "";
@@ -391,25 +390,26 @@ var DataGridRenderer = {
     
     //begin render loop
     outputText = '<?xml version="1.0" encoding="UTF-8"?>' + newLine;
-    outputText += "<rows>"+newLine;
+    outputText += "<array>"+newLine;
     for (var i=0; i < numRows; i++) {
       var row = dataGrid[i];
-      outputText += indent+"<row>"+newLine;
+      outputText += indent+"<dict>"+newLine;
       for (var j=0; j < numColumns; j++) {
-        outputText += indent+indent+'<'+headerNames[j]+'>';          
-        outputText += row[j] || ""
-        outputText += '</'+headerNames[j]+'>'+newLine
+        
+        outputText += indent+indent+'<key>';
+        outputText += headerNames[j];
+        outputText += '</key>'+newLine;
+        outputText += indent+indent+'<string>';
+        outputText += row[j];
+        outputText += '</string>'+newLine;
       };
-      outputText += indent+"</row>"+newLine;
+      outputText += indent+"</dict>"+newLine;
     };
     outputText += "</rows>";
     
     return outputText;
     
   },
-  
-  
-  
   //---------------------------------------
   // XML properties
   //---------------------------------------
@@ -438,6 +438,7 @@ var DataGridRenderer = {
     return outputText;
     
   },
+
   
   //---------------------------------------
   // XML Illustrator
