@@ -390,6 +390,7 @@ var DataGridRenderer = {
     
     //begin render loop
     outputText = '<?xml version="1.0" encoding="UTF-8"?>' + newLine;
+    outputText += "<plist version="1.0">"+newLine;
     outputText += "<array>"+newLine;
     for (var i=0; i < numRows; i++) {
       var row = dataGrid[i];
@@ -405,7 +406,8 @@ var DataGridRenderer = {
       };
       outputText += indent+"</dict>"+newLine;
     };
-    outputText += "</rows>";
+    outputText += "</array>"+newLine;
+    outputText += "</plist>";
     
     return outputText;
     
